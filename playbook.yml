@@ -1,0 +1,17 @@
+- name: Pull de 2 im_playbook
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: no  
+  vars:
+    docker_images:
+      - alpine:latest
+      - busybox:latest
+
+  tasks:
+    - name: Pull Docker images
+      community.docker.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop: "{{ docker_images }}"
+
