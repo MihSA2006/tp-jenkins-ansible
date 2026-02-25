@@ -1,12 +1,14 @@
-- name: Pull de 2 im_playbook
+- name: Pull de 3 images Docker légères
   hosts: localhost
   connection: local
   gather_facts: false
-  become: no  
+  become: no
+
   vars:
     docker_images:
       - alpine:latest
       - busybox:latest
+      - hello-world:latest
 
   tasks:
     - name: Pull Docker images
@@ -14,4 +16,3 @@
         name: "{{ item }}"
         source: pull
       loop: "{{ docker_images }}"
-
